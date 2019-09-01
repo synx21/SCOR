@@ -21,6 +21,7 @@ Collate:
     'EHUM.R'
     'ULBA.R'
     'SCOR.R'
+    'SCOR-package.R'
     'optimized_HUM.R'
     'youden_points.R'
     'YoudenBoxPlot.R'
