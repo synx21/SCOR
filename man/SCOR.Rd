@@ -61,4 +61,13 @@ SCOR(c(1,2,3,4),f, time = 10, lambda = 1e-2)
 
 SCOR(c(2,6,2,7,8),f, parallel = TRUE)
 #Will do Parallel Computing
+
+}
+\references{
+\itemize{
+
+  \item Das, Priyam and De, Debsurya and Maiti, Raju and Chakraborty, Bibhas and Peterson, Christine B \cr
+   "Estimating the Optimal Linear Combination of Biomarkers using Spherically Constrained Optimization" \cr
+         (available at `arXiv \url{http://arxiv.org/abs/1909.04024}).
+}
 }

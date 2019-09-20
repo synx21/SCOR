@@ -1,7 +1,7 @@
 Package: SCOR
 Type: Package
 Title: Spherically Constrained Optimization Routine
-Version: 1.0.0.1
+Version: 1.0.0.2
 Author: Debsurya De, Priyam Das
 Authors@R: c(
       person("Debsurya","De", ,"debsurya001@gmail.com", role =c("cre","aut")),
@@ -26,8 +26,10 @@ Collate:
     'youden_points.R'
     'YoudenBoxPlot.R'
 Maintainer: Debsurya De <debsurya001@gmail.com>
-Description: A package to solve optimization problem where parameters belong to the surface of unit hyper-sphere.This package also includes functions to obtain optimal coefficients for combining multiple bio-markers for classification of multi-class disease outcome categories, using different criteria namely Empirical Hyper-volume Under Maniforlds (EHUM), Smooth approximation of the empirical Hyper-volume Under Maniforlds (SHUM) and Upper and Lower Bound Approach on empirical hyper-volume under maniforlds (ULBA).
+Description: A non-convex optimization package that optimizes any function under the criterion,
+              combination of variables are on the surface of a unit sphere.
 License: MIT + file LICENSE
+URL: https://github.com/synx21/SCOR
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 6.1.99.9001

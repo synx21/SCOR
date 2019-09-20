@@ -37,6 +37,16 @@
 #'
 #' SCOR(c(2,6,2,7,8),f, parallel = TRUE)
 #' #Will do Parallel Computing
+#'
+#' @references
+#' \itemize{
+#'
+#'   \item Das, Priyam and De, Debsurya and Maiti, Raju and Chakraborty, Bibhas and Peterson, Christine B \cr
+#'    "Estimating the Optimal Linear Combination of Biomarkers using Spherically Constrained Optimization" \cr
+#'          (available at `arXiv \url{http://arxiv.org/abs/1909.04024}).
+#' }
+#'
+#'
 #' @name SCOR
 NULL
 
@@ -77,61 +87,57 @@ syn <-
       if (parallel)
       {
         eta <- foreach (h = 1:(2 * d), .combine = rbind) %dopar%
-        {
-          i <- floor((h + 1) / 2)
-          beta <- x[j, ]
-          q1 <- (abs(beta) < lambda)
-          q2 <- !(abs(beta) < lambda)
-          q1[i] <- FALSE
-          q2[i] <- FALSE
-          s1[h] <- (-1) ^ h * s[j]
-          D <-
-            (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) *
-                                                              s1[h] - sum(beta[q1] ^
-                                                                            2))
-          while (D < 0 && abs(s1[h]) > phi)
           {
-            s1[h] <- s1[h] / rho
+            i <- floor((h + 1) / 2)
+            beta <- x[j, ]
+            q1 <- (abs(beta) < lambda)
+            q2 <- !(abs(beta) < lambda)
+            q1[i] <- FALSE
+            q2[i] <- FALSE
+            s1[h] <- (-1) ^ h * s[j]
             D <-
-              (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) *
-                                                                s1[h] - sum(beta[q1] ^
-                                                                              2))
-          }
-          if (!(D < 0))
-          {
-            t1 <- (sqrt(D) - 2 * sum(beta[q2])) / (2 * length(q2[q2]))
-            t2 <-
-              (-sqrt(D) - 2 * sum(beta[q2])) / (2 * length(q2[q2]))
-            p1 <- numeric(d)
-            p2 <- numeric(d)
-            p1[i] <- beta[i] + s1[h]
-            p2[i] <- p1[i]
-            p1[q2] <- beta[q2] + t1
-            p2[q2] <- beta[q2] + t2
-            if (func(p1) > func(p2))
+              (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) * s1[h] - sum(beta[q1] ^ 2))
+            while (D < 0 && abs(s1[h]) > phi)
             {
-              if (!minimize)
-                beta <- p1
+              s1[h] <- s1[h] / rho
+              D <-
+                (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) * s1[h] - sum(beta[q1] ^ 2))
+            }
+            if (!(D < 0))
+            {
+              t1 <- (sqrt(D) - 2 * sum(beta[q2])) / (2 * length(q2[q2]))
+              t2 <-
+                (-sqrt(D) - 2 * sum(beta[q2])) / (2 * length(q2[q2]))
+              p1 <- numeric(d)
+              p2 <- numeric(d)
+              p1[i] <- beta[i] + s1[h]
+              p2[i] <- p1[i]
+              p1[q2] <- beta[q2] + t1
+              p2[q2] <- beta[q2] + t2
+              if (func(p1) > func(p2))
+              {
+                if (!minimize)
+                  beta <- p1
+                else
+                  beta <- p2
+              }
               else
-                beta <- p2
+              {
+                if (minimize)
+                  beta <- p1
+                else
+                  beta <- p2
+              }
+              if (max(abs(beta)) >= 1)
+              {
+                pos = which.max(abs(beta))
+                beta[pos] = sign(beta[pos])
+              }
+              list(func(beta), beta)
             }
             else
-            {
-              if (minimize)
-                beta <- p1
-              else
-                beta <- p2
-            }
-            if (max(abs(beta)) >= 1)
-            {
-              pos = which.max(abs(beta))
-              beta[pos] = sign(beta[pos])
-            }
-            list(func(beta), beta)
+              list(F1, beta)
           }
-          else
-            list(F1, beta)
-        }
         f <- unlist(eta[, 1], use.names = FALSE)
         beta1 <-
           matrix(unlist(eta[, 2], use.names = FALSE),
@@ -151,16 +157,12 @@ syn <-
           q2[i] <- FALSE
           s1[h] <- (-1) ^ h * s[j]
           D <-
-            (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) *
-                                                              s1[h] - sum(beta[q1] ^
-                                                                            2))
+            (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) * s1[h] - sum(beta[q1] ^ 2))
           while (D < 0 && abs(s1[h]) > phi)
           {
             s1[h] <- s1[h] / rho
             D <-
-              (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) *
-                                                                s1[h] - sum(beta[q1] ^
-                                                                              2))
+              (2 * sum(beta[q2])) ^ 2 - 4 * length(q2[q2]) * ((2 * beta[i] + s1[h]) * s1[h] - sum(beta[q1] ^ 2))
           }
           if (!(D < 0))
           {

@@ -6,7 +6,18 @@
 \alias{SCOR-package}
 \title{SCOR: Spherically Constrained Optimization Routine}
 \description{
-A package to solve optimization problem where parameters belong to the surface of unit hyper-sphere.This package also includes functions to obtain optimal coefficients for combining multiple bio-markers for classification of multi-class disease outcome categories, using different criteria namely Empirical Hyper-volume Under Maniforlds (EHUM), Smooth approximation of the empirical Hyper-volume Under Maniforlds (SHUM) and Upper and Lower Bound Approach on empirical hyper-volume under maniforlds (ULBA).
+A package to solve optimization problem where parameters belong to the surface of unit hyper-sphere.
+            This package also includes functions to obtain optimal coefficients for combining multiple bio-markers
+            for classification of multi-class disease outcome categories, using different criteria namely Empirical
+            Hyper-volume Under Maniforlds (EHUM), Smooth approximation of the empirical Hyper-volume Under Maniforlds
+            (SHUM) and Upper and Lower Bound Approach on empirical hyper-volume under maniforlds (ULBA).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/synx21/SCOR}
+}
+
 }
 \author{
 \strong{Maintainer}: Debsurya De \email{debsurya001@gmail.com}

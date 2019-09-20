@@ -19,7 +19,7 @@ estimate_SHUM(beta, labels, x_mat, p = 0)
 Smooth approximation of the empirical Hyper-volume Under Manifolds Estimate
 }
 \description{
-`SHUM` is a smooth approximation of EHUM
+`SHUM` is a class of smoothed estimates of EHUM.
 }
 \examples{
 estimate_SHUM(rep(1,12),colnames(AL),AL)
@@ -28,4 +28,12 @@ estimate_SHUM(rep(1,12),colnames(AL),AL, p = 1)
 
 estimate_SHUM(1:10 , sample(c(rep("lab1",10),rep("lab2",10),rep("lab3",10))), matrix(rnorm(300), nrow = 10))
 
+}
+\references{
+\itemize{
+
+  \item Maiti, Raju and Li, Jialiang and Das, Priyam and Feng, Lei and Hausenloy, Derek and Chakraborty, Bibhas \cr
+         "A distribution-free smoothed combination method of biomarkers to improve diagnostic accuracy in multi-category classification" \cr
+         (available at `arXiv \url{http://arxiv.org/abs/1904.10046}).
+}
 }
